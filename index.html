@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+    <link rel="stylesheet" href="index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <div v-if="books.length">
+        <table>
+          <thead>
+            <tr>
+              <th>Book name</th>
+              <th>Publication date</th>
+              <th>Price</th>
+              <th>Purchase quantity</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in books">
+              <th>{{item.id}}</th>
+              <th>{{item.name}}</th>
+              <th>{{item.date}}</th>
+              <th>{{item.price | showPrice}}</th>
+              <th>
+                <button @click="decrement(index)" :disabled="item.count <= 0">
+                  -
+                </button>
+                {{item.count}}
+                <button @click="increment(index)">+</button>
+              </th>
+              <th>
+                <button @click="removeHandle(index)">Remove</button>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+        <h2>Total price: {{totalPrice | showPrice}}</h2>
+      </div>
+      <h2 v-else>Shopping cart is empty</h2>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
